@@ -1,8 +1,8 @@
 # Seth Quantum Cloud - Gateway API Specification
 
 **Version:** 1.0.0
-**Base URL:** `https://sethquantum.net/api/v1`
-**Protocol:** HTTPS
+**Base URL:** `http://sethquantum.net/api/v1`
+**Protocol:** http
 **Format:** JSON, SBF (Seth Binary Format)
 
 ---
@@ -48,7 +48,7 @@ Authorization: Bearer your_jwt_token_here
 
 ```bash
 # 1. Register
-curl -X POST https://sethquantum.net/api/v1/auth/register \
+curl -X POST http://sethquantum.net/api/v1/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "username": "your_username",
@@ -57,7 +57,7 @@ curl -X POST https://sethquantum.net/api/v1/auth/register \
   }'
 
 # 2. Login to receive JWT token
-curl -X POST https://sethquantum.net/api/v1/auth/login \
+curl -X POST http://sethquantum.net/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "username": "your_username",
@@ -65,7 +65,7 @@ curl -X POST https://sethquantum.net/api/v1/auth/login \
   }'
 
 # 3. Create API Key
-curl -X POST https://sethquantum.net/api/v1/keys \
+curl -X POST http://sethquantum.net/api/v1/keys \
   -H "Authorization: Bearer YOUR_JWT_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -90,6 +90,16 @@ curl -X POST https://sethquantum.net/api/v1/keys \
 ---
 
 ## API Endpoints
+
+### Gateway / Docs
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/health` | Gateway health (DB/Compute) |
+| GET | `/api` | API meta info |
+| GET | `/docs` | Swagger UI |
+| GET | `/swagger.json` | OpenAPI schema |
+| GET | `/api/v1/openapi.json` | OpenAPI schema under API prefix |
 
 ### Authentication
 
@@ -117,7 +127,7 @@ curl -X POST https://sethquantum.net/api/v1/keys \
 | POST | `/compute/run` | Synchronous execution (JSON) | Sync |
 | POST | `/compute/run/sbf` | Synchronous execution (Binary) | Sync |
 | POST | `/compute/jobs` | Submit async job (JSON) | Async |
-| POST | `/compute/jobs/sbf` | Submit async job (Binary) | Async |
+| GET | `/compute/jobs` | List jobs | Async |
 | GET | `/compute/jobs/{job_id}` | Query job status | Async |
 | GET | `/compute/jobs/{job_id}/result` | Retrieve job result | Async |
 | DELETE | `/compute/jobs/{job_id}` | Cancel/delete job | Async |
@@ -481,7 +491,7 @@ sbf_data = encode_sbf_circuit(circuit)
 
 # Synchronous execution with SBF
 response = requests.post(
-    'https://sethquantum.net/api/v1/compute/run/sbf',
+    'http://sethquantum.net/api/v1/compute/run/sbf',
     headers={'X-API-Key': 'sk_live_your_api_key'},
     data=sbf_data,
     headers={'Content-Type': 'application/octet-stream'}
@@ -906,7 +916,7 @@ import requests
 import json
 
 API_KEY = "sk_live_your_api_key_here"
-BASE_URL = "https://sethquantum.net/api/v1"
+BASE_URL = "http://sethquantum.net/api/v1"
 
 # Bell state circuit
 circuit = {
@@ -942,7 +952,7 @@ print("Time:", result['result']['execution_time_ms'], "ms")
 const axios = require('axios');
 
 const API_KEY = 'sk_live_your_api_key_here';
-const BASE_URL = 'https://sethquantum.net/api/v1';
+const BASE_URL = 'http://sethquantum.net/api/v1';
 
 const circuit = {
   circuit: {
@@ -975,7 +985,7 @@ axios.post(`${BASE_URL}/compute/run`, circuit, {
 ### cURL
 
 ```bash
-curl -X POST https://sethquantum.net/api/v1/compute/run \
+curl -X POST http://sethquantum.net/api/v1/compute/run \
   -H "X-API-Key: sk_live_your_api_key_here" \
   -H "Content-Type: application/json" \
   -d '{
@@ -995,9 +1005,9 @@ curl -X POST https://sethquantum.net/api/v1/compute/run \
 
 ## Support
 
-- **Website**: https://sethquantum.net
-- **Dashboard**: https://sethquantum.net/dashboard
-- **Documentation**: https://docs.sethquantum.net
+- **Website**: http://sethquantum.net
+- **Dashboard**: http://sethquantum.net/dashboard
+- **Documentation**: http://docs.sethquantum.net
 - **Email**: flyingtext@nate.com
 
 ---
