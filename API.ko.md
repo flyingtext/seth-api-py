@@ -91,6 +91,16 @@ curl -X POST https://sethquantum.net/api/v1/keys \
 
 ## API 엔드포인트
 
+### 게이트웨이/문서
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/health` | 게이트웨이 상태 확인 (DB/Compute) |
+| GET | `/api` | API 메타 정보 |
+| GET | `/docs` | Swagger UI |
+| GET | `/swagger.json` | OpenAPI 스키마 |
+| GET | `/api/v1/openapi.json` | API Prefix OpenAPI 스키마 |
+
 ### 인증 관련
 
 | Method | Endpoint | Description |
@@ -117,7 +127,7 @@ curl -X POST https://sethquantum.net/api/v1/keys \
 | POST | `/compute/run` | 동기 실행 (JSON) | Sync |
 | POST | `/compute/run/sbf` | 동기 실행 (Binary) | Sync |
 | POST | `/compute/jobs` | 비동기 작업 제출 (JSON) | Async |
-| POST | `/compute/jobs/sbf` | 비동기 작업 제출 (Binary) | Async |
+| GET | `/compute/jobs` | 작업 목록 조회 | Async |
 | GET | `/compute/jobs/{job_id}` | 작업 상태 조회 | Async |
 | GET | `/compute/jobs/{job_id}/result` | 작업 결과 조회 | Async |
 | DELETE | `/compute/jobs/{job_id}` | 작업 취소/삭제 | Async |
