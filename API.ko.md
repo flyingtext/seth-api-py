@@ -1,8 +1,8 @@
 # Seth Quantum Cloud - Gateway API 규격서
 
 **Version:** 1.0.0
-**Base URL:** `https://sethquantum.net/api/v1`
-**Protocol:** HTTPS
+**Base URL:** `http://sethquantum.net/api/v1`
+**Protocol:** http
 **Format:** JSON, SBF (Seth Binary Format)
 
 ---
@@ -48,7 +48,7 @@ Authorization: Bearer your_jwt_token_here
 
 ```bash
 # 1. 회원가입
-curl -X POST https://sethquantum.net/api/v1/auth/register \
+curl -X POST http://sethquantum.net/api/v1/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "username": "your_username",
@@ -57,7 +57,7 @@ curl -X POST https://sethquantum.net/api/v1/auth/register \
   }'
 
 # 2. 로그인하여 JWT 토큰 받기
-curl -X POST https://sethquantum.net/api/v1/auth/login \
+curl -X POST http://sethquantum.net/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "username": "your_username",
@@ -65,7 +65,7 @@ curl -X POST https://sethquantum.net/api/v1/auth/login \
   }'
 
 # 3. API Key 생성
-curl -X POST https://sethquantum.net/api/v1/keys \
+curl -X POST http://sethquantum.net/api/v1/keys \
   -H "Authorization: Bearer YOUR_JWT_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -491,7 +491,7 @@ sbf_data = encode_sbf_circuit(circuit)
 
 # SBF로 동기 실행
 response = requests.post(
-    'https://sethquantum.net/api/v1/compute/run/sbf',
+    'http://sethquantum.net/api/v1/compute/run/sbf',
     headers={'X-API-Key': 'sk_live_your_api_key'},
     data=sbf_data,
     headers={'Content-Type': 'application/octet-stream'}
@@ -916,7 +916,7 @@ import requests
 import json
 
 API_KEY = "sk_live_your_api_key_here"
-BASE_URL = "https://sethquantum.net/api/v1"
+BASE_URL = "http://sethquantum.net/api/v1"
 
 # Bell 상태 회로
 circuit = {
@@ -952,7 +952,7 @@ print("Time:", result['result']['execution_time_ms'], "ms")
 const axios = require('axios');
 
 const API_KEY = 'sk_live_your_api_key_here';
-const BASE_URL = 'https://sethquantum.net/api/v1';
+const BASE_URL = 'http://sethquantum.net/api/v1';
 
 const circuit = {
   circuit: {
@@ -985,7 +985,7 @@ axios.post(`${BASE_URL}/compute/run`, circuit, {
 ### cURL
 
 ```bash
-curl -X POST https://sethquantum.net/api/v1/compute/run \
+curl -X POST http://sethquantum.net/api/v1/compute/run \
   -H "X-API-Key: sk_live_your_api_key_here" \
   -H "Content-Type: application/json" \
   -d '{
@@ -1005,8 +1005,8 @@ curl -X POST https://sethquantum.net/api/v1/compute/run \
 
 ## 지원
 
-- **웹사이트**: https://sethquantum.net
-- **대시보드**: https://sethquantum.net/dashboard
+- **웹사이트**: http://sethquantum.net
+- **대시보드**: http://sethquantum.net/dashboard
 
 ---
 
